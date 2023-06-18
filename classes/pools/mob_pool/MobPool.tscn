@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://classes/pools/mob_pool/MobPool.gd" id="1_iwfvm"]
 
 [node name="MobPool" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_iwfvm")

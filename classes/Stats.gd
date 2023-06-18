@@ -43,6 +43,12 @@ class Stat:
 		self.name = name
 		self.base_value = base_value
 		self.current_value = base_value
+	
+	func set_stat(value: float):
+		self.current_value = value
+	
+	func reset_stat():
+		self.current_value = base_value
 
 	func update_modifier(delta: float):
 		for modifier in modifiers.values():

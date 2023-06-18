@@ -1,11 +1,11 @@
-class_name MobPool extends Node
+class_name MobPool extends Node2D
 
 @onready var mob_scene = preload("res://classes/mob/BaseMob.tscn")
 
 var boss_mobs_max = 10
 var boss_mob_pool_active = {}
 var boss_mob_pool_inactive = {}
-var mobs_max = 100
+var mobs_max = 1
 var mob_pool_active = {}
 var mob_pool_inactive = {}
 
@@ -21,7 +21,7 @@ func init_mob_pool_inactive():
 	var mob
 	for i in range(mobs_max):
 		mob = mob_scene.instantiate()
-		mob.set_target(Global.player)
+		mob.set_player(Global.player)
 		mob_pool_inactive[mob.get_instance_id()] = mob
 		add_child(mob)
 

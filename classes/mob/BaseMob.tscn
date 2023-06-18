@@ -3,25 +3,29 @@
 [ext_resource type="Script" path="res://classes/mob/BaseMob.gd" id="1_svajg"]
 [ext_resource type="SpriteFrames" uid="uid://djj4u25t3c8uo" path="res://assets/spriteframes/players/player_meltdown.tres" id="2_yjh60"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ddq3x"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iq0e8"]
 friction = 0.0
-bounce = 1.0
+absorbent = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ksxdh"]
 radius = 19.5
 
 [node name="BaseMob" type="RigidBody2D"]
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 2
-physics_material_override = SubResource("PhysicsMaterial_ddq3x")
+physics_material_override = SubResource("PhysicsMaterial_iq0e8")
 lock_rotation = true
 script = ExtResource("1_svajg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
 shape = SubResource("CircleShape2D_ksxdh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 32)
 sprite_frames = ExtResource("2_yjh60")
 animation = &"idle"
 autoplay = "moving"
 frame_progress = 0.131051
+offset = Vector2(0, -32)

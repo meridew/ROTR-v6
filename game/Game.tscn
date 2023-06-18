@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://game/Game.gd" id="1_g26nm"]
 
 [node name="Game" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_g26nm")
 
 [node name="Projectiles" type="Node2D" parent="."]

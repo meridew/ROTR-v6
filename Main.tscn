@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsrti7qekvflq"]
+[gd_scene load_steps=8 format=3 uid="uid://bbvb4acmyqdew"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d5s5h"]
 [ext_resource type="Texture2D" uid="uid://d37vpk4gsdqko" path="res://assets/sprites/backgrounds/bg_main_menu.png" id="2_6a7uy"]
@@ -209,6 +209,7 @@ enemy. Penetrative capabilites. (SMJ).
  - Projectile Size: 1 	(+10%)"
 
 [node name="OBELISK" type="HBoxContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect"]
+visible = false
 layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/OBELISK"]
@@ -249,6 +250,7 @@ bouncing capabilities somehow.
  - Projectile Frequency: 1 	(+10%)"
 
 [node name="MELTDOWN" type="HBoxContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect"]
+visible = false
 layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/MELTDOWN"]
