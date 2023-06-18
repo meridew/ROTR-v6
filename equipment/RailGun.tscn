@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://du6im1m0fbhhp"]
+
+[ext_resource type="Script" path="res://equipment/RailGun.gd" id="1_igd0p"]
+
+[node name="RailGun" type="Node2D"]
+script = ExtResource("1_igd0p")

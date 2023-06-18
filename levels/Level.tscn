@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://byyj41kir2xf1"]
+
+[ext_resource type="Texture2D" uid="uid://7fyex4h80cf4" path="res://assets/sprites/floors/floor_desert.png" id="1_lwcip"]
+
+[node name="Level" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_lwcip")
+centered = false

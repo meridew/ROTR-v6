@@ -1,0 +1,329 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsrti7qekvflq"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_d5s5h"]
+[ext_resource type="Texture2D" uid="uid://d37vpk4gsdqko" path="res://assets/sprites/backgrounds/bg_main_menu.png" id="2_6a7uy"]
+[ext_resource type="SpriteFrames" uid="uid://bywr4fn71d62h" path="res://assets/spriteframes/players/player_slugger.tres" id="3_c43p5"]
+[ext_resource type="SpriteFrames" uid="uid://ovjgfnn0ukhx" path="res://assets/spriteframes/players/player_obelisk.tres" id="4_fny00"]
+[ext_resource type="SpriteFrames" uid="uid://djj4u25t3c8uo" path="res://assets/spriteframes/players/player_meltdown.tres" id="5_edhw5"]
+[ext_resource type="Texture2D" uid="uid://c308uvu2qf0ld" path="res://assets/sprites/icons/floor_desert-icon.png" id="6_xipts"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks5i4"]
+bg_color = Color(0, 0.282353, 0.14902, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_d5s5h")
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6a7uy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="StartMenu" type="Panel" parent="Menu/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/HBoxContainer/StartMenu"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -72.5
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/StartMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "START"
+
+[node name="SettingsButton" type="Button" parent="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS
+"
+
+[node name="QuitButton" type="Button" parent="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUIT
+"
+
+[node name="SetingsMenu" type="Panel" parent="Menu/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/HBoxContainer/SetingsMenu"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -47.5
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Music" type="HBoxContainer" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer/Music"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "MUSIC VOLUME"
+
+[node name="HSlider" type="HSlider" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="SoundFX" type="HBoxContainer" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer/SoundFX"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "SOUND FX"
+
+[node name="HSlider" type="HSlider" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer/SoundFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Gay" type="HBoxContainer" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer/Gay"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "GAY"
+
+[node name="HSlider" type="CheckBox" parent="Menu/HBoxContainer/SetingsMenu/MarginContainer/VBoxContainer/Gay"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="GameMenu" type="Panel" parent="Menu/HBoxContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/HBoxContainer/GameMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlayerSelectLabel" type="Label" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "PLAYER SELECT"
+
+[node name="PlayerSelect" type="TabContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SLUGGER" type="HBoxContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/SLUGGER"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/SLUGGER/CenterContainer"]
+position = Vector2(175, 197)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("3_c43p5")
+animation = &"moving"
+autoplay = "idle"
+speed_scale = 2.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/SLUGGER"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/SLUGGER/CenterContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "PLAYER: SLUGGER
+
+Chunky diesel boi, slow but with above 
+average HP. Tank tracks are cool.
+
+ - SPEED 100
+ - HP 100
+
+WEAPON: GAUSS CANON
+
+Fires single tungsten slug at nearest
+enemy. Penetrative capabilites. (SMJ).
+
+ - Projectile Speed: 250 (+10%)
+ - Projectile Damage: 100 (+2%)
+ - Projectile Passthrough: 0 (+1)
+ - Projectile Frequency: 1 	(+10%)
+ - Projectile Size: 1 	(+10%)"
+
+[node name="OBELISK" type="HBoxContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/OBELISK"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/OBELISK/CenterContainer"]
+position = Vector2(174, 200)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("4_fny00")
+animation = &"moving"
+autoplay = "idle"
+speed_scale = 2.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/OBELISK"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/OBELISK/CenterContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "PLAYER: OBELISK
+
+Angry laser boi. Partially alien tech,
+mostly laser robot. Tentacles? Fast 
+but low HP.
+
+ - SPEED 120
+ - HP 80
+
+WEAPON: LASER
+
+Fires laser at nearest enemy. Has 
+bouncing capabilities somehow.
+
+ - Projectile Damage: 10 (+10%)
+ - Projectile Passthrough: 0 (+1)
+ - Projectile Frequency: 1 	(+10%)"
+
+[node name="MELTDOWN" type="HBoxContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/MELTDOWN"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/MELTDOWN/CenterContainer"]
+position = Vector2(174, 200)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("5_edhw5")
+animation = &"moving"
+autoplay = "moving"
+frame_progress = 0.813595
+speed_scale = 2.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/MELTDOWN"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/PlayerSelect/MELTDOWN/CenterContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "PLAYER: MELTDOWN
+
+Hot boi, clanky and leaking
+radioactive blue goop. 
+Not good, not terrible.
+
+ - SPEED 120
+ - HP 80
+
+WEAPON: EXPOSED CORE
+
+A walking damage radius, causing
+damage per second.
+
+- Damage: 50 (+1%)
+ - Damage Radius: 150  (+5%)
+ - Damage Frequency: 1 (+2%)"
+
+[node name="LevelSelectLabel" type="Label" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "LEVEL SELECT"
+
+[node name="LevelSelect" type="TabContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DESERT" type="HBoxContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/LevelSelect"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/LevelSelect/DESERT"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/LevelSelect/DESERT/CenterContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("6_xipts")
+
+[node name="GameMenuStart" type="Button" parent="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_ks5i4")
+text = "PLAY >"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu"]
+
+[connection signal="pressed" from="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer/StartButton" to="Menu" method="_on_start_button_pressed" flags=18]
+[connection signal="pressed" from="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer/SettingsButton" to="Menu" method="_on_settings_button_pressed" flags=18]
+[connection signal="pressed" from="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/StartMenu/MarginContainer/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed" flags=18]
+[connection signal="pressed" from="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/GameMenuStart" to="." method="_on_game_menu_start_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/GameMenu/MarginContainer/VBoxContainer/GameMenuStart" to="Menu" method="_on_game_menu_start_pressed" flags=18]

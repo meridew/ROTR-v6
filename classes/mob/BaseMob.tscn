@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj188qpm7no7w"]
+
+[ext_resource type="Script" path="res://classes/mob/BaseMob.gd" id="1_svajg"]
+[ext_resource type="SpriteFrames" uid="uid://djj4u25t3c8uo" path="res://assets/spriteframes/players/player_meltdown.tres" id="2_yjh60"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ddq3x"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ksxdh"]
+radius = 19.5
+
+[node name="BaseMob" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_ddq3x")
+lock_rotation = true
+script = ExtResource("1_svajg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ksxdh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_yjh60")
+animation = &"idle"
+autoplay = "moving"
+frame_progress = 0.131051

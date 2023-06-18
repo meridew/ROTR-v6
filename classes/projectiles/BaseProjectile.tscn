@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bubphs5yiflqt"]
+
+[ext_resource type="Script" path="res://classes/projectiles/BaseProjectile.gd" id="1_a4qt1"]
+[ext_resource type="Texture2D" uid="uid://chtncx53b3the" path="res://assets/sprites/projectiles/projectile_gauss_round.png" id="2_asolh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_arh88"]
+radius = 9.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qxept"]
+emission_shape = 2
+emission_sphere_radius = 7.31
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 1)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 17.39
+initial_velocity_max = 60.88
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_min = 12.17
+linear_accel_max = 12.17
+scale_max = 2.0
+turbulence_enabled = true
+turbulence_noise_strength = 0.0
+
+[node name="BaseProjectile" type="Area2D"]
+script = ExtResource("1_a4qt1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_arh88")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+texture = ExtResource("2_asolh")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_qxept")
+speed_scale = 1.55
+randomness = 1.0
+visibility_rect = Rect2(-500, -500, 1920, 1080)
