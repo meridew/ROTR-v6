@@ -91,10 +91,10 @@ class CircleState extends State:
 		circle_timer += delta
 		if circle_timer < circle_duration:
 			# Compute a circling direction with gradually reducing radius
-			var direction = (mob.player.global_position - mob.global_position).normalized()
+			var direction = (Global.player.global_position - Global.global_position).normalized()
 			var perpendicular = Vector2(direction.y, -direction.x)
-			var circling_point = mob.player.global_position + direction * radius + perpendicular.rotated(angle_speed * circle_timer) * radius
-			direction = (circling_point - mob.global_position).normalized() * mob.stats.speed.current_value
+			var circling_point = Global.player.global_position + direction * radius + perpendicular.rotated(angle_speed * circle_timer) * radius
+			direction = (circling_point - Global.global_position).normalized() * mob.stats.speed.current_value
 
 			# Decrease the radius to move closer to the player
 			radius -= mob.stats.speed.current_value * delta
