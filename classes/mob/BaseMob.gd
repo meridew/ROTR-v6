@@ -7,26 +7,34 @@ class_name BaseMob extends RigidBody2D
 var stats: Stats
 var statuses: Statuses
 var intended_velocity: Vector2 = Vector2.ZERO
-var states
-var mob_state # new instance variable for current state
+var states: Dictionary = {}
+var mob_state: State
+var mob_scale
 
 func _init():
-	mass = 1
+	
+	mob_scale = randf_range(0.5, 2)
+
 	stats = Stats.new()
 	stats.add_stat('speed', randf_range(80, 120))
-	stats.add_stat('scale', randf_range(1, 2))
+	stats.add_stat('scale', mob_scale)
+	stats.add_stat('mass', mob_scale * 10.0)
+	
 	statuses = Statuses.new()
 	statuses.add_status('wander', 1.6, 10)
+	
 	states = {
-		State.States.IDLE: State.IdleState.new(self),
-		State.States.DEFAULT: State.DefaultState.new(self),
-		State.States.CHARGE: State.ChargeState.new(self),
-		State.States.LUNGE: State.LungeState.new(self),
+		State.Type.IDLE: State.IdleState.new(self),
+		State.Type.DEFAULT: State.DefaultState.new(self),
+		State.Type.CHARGE: State.ChargeState.new(self),
+		State.Type.LUNGE: State.LungeState.new(self),
+		State.Type.CIRCLE: State.CircleState.new(self),
 	}
-	change_state(State.States.CHARGE) # change state with enum
+	
+	change_state(State.Type.DEFAULT)
 
 func _ready():
-	global_position = Vector2(randi_range(-100,100),randi_range(-100,100))
+	global_position = Vector2(randi_range(-5000,5000),randi_range(-5000,5000))
 	animated_sprite.set_frame_and_progress(randf_range(0, animated_sprite.sprite_frames.get_frame_count('moving')), randf())
 	animated_sprite.scale = Vector2(stats.scale.current_value,stats.scale.current_value)
 	collision_shape.scale = Vector2(stats.scale.current_value,stats.scale.current_value)
@@ -41,7 +49,7 @@ func _physics_process(delta):
 func _integrate_forces(state):
 	state.set_linear_velocity(intended_velocity)
 
-func change_state(state_name: State.States):
+func change_state(state_name: State.Type):
 	mob_state = states[state_name]
 
 func set_sprite(direction: Vector2):

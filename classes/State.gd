@@ -1,10 +1,11 @@
 class_name State
 
-enum States {
+enum Type {
 	IDLE,
 	DEFAULT,
 	CHARGE,
-	LUNGE
+	LUNGE,
+	CIRCLE
 }
 
 var mob
@@ -49,7 +50,7 @@ class ChargeState extends State:
 			mob.set_sprite(Vector2.ZERO)
 		else:
 			timer = 0
-			mob.change_state(State.States.DEFAULT)
+			mob.change_state(State.Type.DEFAULT)
 
 class LungeState extends State:
 	var lunge_timer = 0
@@ -78,4 +79,29 @@ class LungeState extends State:
 			lunge_count += 1
 			if lunge_count >= max_lunges:
 				lunge_count = 0
-				mob.change_state(States.DEFAULT) # Pass state name as string
+				mob.change_state(State.Type.DEFAULT) # Pass state name as string
+
+class CircleState extends State:
+	var circle_timer = 0
+	var circle_duration = 100
+	var radius = 1000
+	var angle_speed = 1
+
+	func behavior(delta):
+		circle_timer += delta
+		if circle_timer < circle_duration:
+			# Compute a circling direction with gradually reducing radius
+			var direction = (mob.player.global_position - mob.global_position).normalized()
+			var perpendicular = Vector2(direction.y, -direction.x)
+			var circling_point = mob.player.global_position + direction * radius + perpendicular.rotated(angle_speed * circle_timer) * radius
+			direction = (circling_point - mob.global_position).normalized() * mob.stats.speed.current_value
+
+			# Decrease the radius to move closer to the player
+			radius -= mob.stats.speed.current_value * delta
+
+			mob.intended_velocity = direction
+			mob.set_sprite(direction)
+		else:
+			circle_timer = 0
+			radius = 150
+			mob.change_state(State.Type.DEFAULT)

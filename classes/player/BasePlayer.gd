@@ -15,7 +15,7 @@ var mob_check_interval = 0.1
 var input_direction = Vector2.ZERO
 
 func _init():
-	mass = 100
+	mass = 10
 	stats = Stats.new()
 	stats.add_stat('hp',100)
 	stats.add_stat('hp_max',100)

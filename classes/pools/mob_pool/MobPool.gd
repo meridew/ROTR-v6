@@ -5,7 +5,7 @@ class_name MobPool extends Node2D
 var boss_mobs_max = 10
 var boss_mob_pool_active = {}
 var boss_mob_pool_inactive = {}
-var mobs_max = 1
+var mobs_max = 500
 var mob_pool_active = {}
 var mob_pool_inactive = {}
 
@@ -22,6 +22,8 @@ func init_mob_pool_inactive():
 	for i in range(mobs_max):
 		mob = mob_scene.instantiate()
 		mob.set_player(Global.player)
+		var rand = State.Type.values()[randi() % State.Type.size()]
+		mob.change_state(rand)
 		mob_pool_inactive[mob.get_instance_id()] = mob
 		add_child(mob)
 
