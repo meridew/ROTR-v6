@@ -25,7 +25,7 @@ func remove_stat(name: String):
 
 func update_modifiers(delta: float):
 	for stat in self.stats.values():
-		stat.update_modifiers_time(delta)
+		stat.update_modifier(delta)
 		stat.remove_expired_modifiers()
 
 class Stat:
@@ -44,7 +44,7 @@ class Stat:
 		self.base_value = base_value
 		self.current_value = base_value
 
-	func update_modifiers_time(delta: float):
+	func update_modifier(delta: float):
 		for modifier in modifiers.values():
 			modifier.elapsed += delta
 

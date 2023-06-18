@@ -4,6 +4,8 @@ class_name BasePlayer extends CharacterBody2D
 @onready var mob_detection_area = $MobDetetctionArea
 
 var stats: Stats
+var statuses: Statuses
+
 var mobs_in_detection_area: Dictionary = {}
 var random_mob = null
 var closest_mob = null
@@ -12,23 +14,30 @@ var mob_check_elapsed_time = 0.0
 var mob_check_interval = 0.1
 var input_direction = Vector2.ZERO
 
-
 func _init():
 	stats = Stats.new()
 	stats.add_stat('hp',100)
 	stats.add_stat('hp_max',100)
 	stats.add_stat('speed',300)
+	
+	statuses = Statuses.new()
+	statuses.add_status('wander',2)
 
 func _physics_process(_delta):
 	get_input()
 	update_animation()
 
 func _process(delta):
+	update_mob_data(delta)
+	stats.update_modifiers(delta)
+	statuses.update_statuses(delta)
+
+func update_mob_data(delta):
 	mob_check_elapsed_time += delta
 	if mob_check_elapsed_time >= mob_check_interval:
 		get_mob_data()
 		mob_check_elapsed_time = 0.0
-
+		
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 
