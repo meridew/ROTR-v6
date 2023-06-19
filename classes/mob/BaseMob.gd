@@ -29,12 +29,14 @@ func _init():
 		State.Type.CHARGE: State.ChargeState.new(self),
 		State.Type.LUNGE: State.LungeState.new(self),
 		State.Type.CIRCLE: State.CircleState.new(self),
+		State.Type.RETREAT: State.RetreatState.new(self)
+		
 	}
 	
-	change_state(State.Type.DEFAULT)
+	change_state(State.Type.LUNGE)
 
 func _ready():
-	global_position = Vector2(randi_range(-5000,5000),randi_range(-5000,5000))
+	global_position = Vector2(randi_range(-500,500),randi_range(-500,500))
 	animated_sprite.set_frame_and_progress(randf_range(0, animated_sprite.sprite_frames.get_frame_count('moving')), randf())
 	animated_sprite.scale = Vector2(stats.scale.current_value,stats.scale.current_value)
 	collision_shape.scale = Vector2(stats.scale.current_value,stats.scale.current_value)

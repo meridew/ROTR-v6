@@ -5,7 +5,9 @@ enum Type {
 	DEFAULT,
 	CHARGE,
 	LUNGE,
-	CIRCLE
+	CIRCLE,
+	RETREAT,
+	LINE
 }
 
 var mob
@@ -82,26 +84,63 @@ class LungeState extends State:
 				mob.change_state(State.Type.DEFAULT) # Pass state name as string
 
 class CircleState extends State:
-	var circle_timer = 0
-	var circle_duration = 100
-	var radius = 1000
-	var angle_speed = 1
+	var circle_distance = 100
+	var circle_speed = 100.0
+	var approach_speed = 0.5
+	var fluctuation_frequency = 1.0
+	var fluctuation_amplitude = 20.0
+	var time = 0.0
 
 	func behavior(delta):
-		circle_timer += delta
-		if circle_timer < circle_duration:
-			# Compute a circling direction with gradually reducing radius
-			var direction = (Global.player.global_position - Global.global_position).normalized()
-			var perpendicular = Vector2(direction.y, -direction.x)
-			var circling_point = Global.player.global_position + direction * radius + perpendicular.rotated(angle_speed * circle_timer) * radius
-			direction = (circling_point - Global.global_position).normalized() * mob.stats.speed.current_value
+		# Calculate the desired position around the player
+		var angle = time * circle_speed
+		var offset = Vector2(cos(angle), sin(angle)) * circle_distance
+		var desired_position = mob.player.global_position + offset
 
-			# Decrease the radius to move closer to the player
-			radius -= mob.stats.speed.current_value * delta
+		# Add fluctuation to the distance
+		circle_distance += sin(time * fluctuation_frequency) * fluctuation_amplitude * delta
 
+		# Calculate the direction towards the desired position
+		var direction = desired_position - mob.global_position
+
+		# The mob's speed is determined by its stats
+		var speed = mob.stats.get_stat('speed').current_value * 5  # Increase speed by multiplying by 5
+
+		# Clamp the speed to a maximum value
+		var max_speed = 100.0
+		speed = clamp(speed, 0.0, max_speed)
+
+		# Calculate the acceleration (force) needed to move towards the player, taking into account the mob's mass
+		var mass = mob.stats.get_stat('mass').current_value * 0.1  # Decrease mass by multiplying by 0.1
+		var force = direction.normalized() * speed / mass
+
+		# Add the force to the mob's velocity
+		mob.intended_velocity += force * delta
+
+		# Clamp the mob's velocity magnitude to the maximum speed
+		mob.intended_velocity = mob.intended_velocity.normalized() * clamp(mob.intended_velocity.length(), 0.0, max_speed)
+
+		# Set sprite direction
+		mob.set_sprite(mob.intended_velocity)
+
+		# Gradually approach the player
+		circle_distance -= approach_speed * delta
+
+		# Update time
+		time += delta
+
+class RetreatState extends State:
+	var retreat_duration = 5.0
+	var retreat_timer = 0.0
+
+	func behavior(delta):
+		retreat_timer += delta
+
+		if retreat_timer < retreat_duration:
+			var direction = mob.global_position - mob.player.global_position
+			direction = direction.normalized() * mob.stats.speed.current_value
 			mob.intended_velocity = direction
 			mob.set_sprite(direction)
 		else:
-			circle_timer = 0
-			radius = 150
+			retreat_timer = 0.0
 			mob.change_state(State.Type.DEFAULT)
